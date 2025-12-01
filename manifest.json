@@ -1,0 +1,32 @@
+{
+  "name": "Elegant Alarm Pro",
+  "short_name": "AlarmPro",
+  "description": "Aplikasi alarm elegan dengan notifikasi layar depan",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#6C63FF",
+  "theme_color": "#6C63FF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏰</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/23f0.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Set Alarm Baru",
+      "short_name": "Alarm Baru",
+      "description": "Atur alarm baru dengan cepat",
+      "url": "/?new-alarm",
+      "icons": [{ "src": "https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/23f0.png", "sizes": "64x64" }]
+    }
+  ]
+}
