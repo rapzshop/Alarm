@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Alarm Pro - Alarm Layar Depan</title>
+    <meta name="theme-color" content="#6C63FF">
+    <meta name="description" content="Aplikasi alarm elegan dengan notifikasi layar depan">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="installButton" class="install-btn">
+        <i class="fas fa-download"></i> Install
+    </button>
+
+    <button id="permissionButton" class="permission-btn">
+        <i class="fas fa-bell"></i> Aktifkan Notifikasi
+    </button>
+
+    <!-- Alarm Active Screen -->
+    <div class="alarm-active-screen" id="alarmActiveScreen">
+        <div class="alarm-active-content">
+            <div class="alarm-active-icon">⏰</div>
+            <h1 class="alarm-active-title">WAKTUNYA BANGUN!</h1>
+            <div class="alarm-active-time" id="activeAlarmTime">07:00</div>
+            <div class="alarm-active-name" id="activeAlarmName">Alarm Pagi</div>
+            <div class="alarm-active-actions">
+                <button class="alarm-active-btn btn-snooze" id="snoozeBtn">
+                    <i class="fas fa-clock"></i> Tunda 5 Menit
+                </button>
+                <button class="alarm-active-btn btn-stop-alarm" id="stopAlarmBtn">
+                    <i class="fas fa-stop"></i> Hentikan Alarm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">⏰</div>
+            <h1>Elegant Alarm Pro</h1>
+            <p class="subtitle">Alarm yang muncul di layar depan</p>
+        </header>
+
+        <div class="current-time">
+            <div class="time-display" id="currentTime">00:00:00</div>
+            <div class="date-display" id="currentDate">Hari, Tanggal Bulan Tahun</div>
+        </div>
+
+        <!-- Quick Alarm Options -->
+        <div class="alarm-form">
+            <h2>Alarm Cepat</h2>
+            <div class="quick-alarms">
+                <button class="quick-alarm-btn" data-minutes="5">5 Menit Lagi</button>
+                <button class="quick-alarm-btn" data-minutes="10">10 Menit Lagi</button>
+                <button class="quick-alarm-btn" data-minutes="15">15 Menit Lagi</button>
+                <button class="quick-alarm-btn" data-minutes="30">30 Menit Lagi</button>
+                <button class="quick-alarm-btn" data-minutes="60">1 Jam Lagi</button>
+            </div>
+        </div>
+
+        <!-- Alarm Form -->
+        <div class="alarm-form">
+            <h2>Atur Alarm Baru</h2>
+            <div class="time-inputs">
+                <div class="time-input">
+                    <label for="hour">Jam</label>
+                    <input type="number" id="hour" min="0" max="23" value="07" placeholder="00">
+                </div>
+                <div class="time-input">
+                    <label for="minute">Menit</label>
+                    <input type="number" id="minute" min="0" max="59" value="00" placeholder="00">
+                </div>
+                <div class="time-input">
+                    <label for="second">Detik</label>
+                    <input type="number" id="second" min="0" max="59" value="00" placeholder="00">
+                </div>
+            </div>
+
+            <div class="repeat-options">
+                <div class="repeat-option">
+                    <label for="repeatType">Pengulangan</label>
+                    <select id="repeatType">
+                        <option value="once">Sekali</option>
+                        <option value="daily">Setiap Hari</option>
+                        <option value="weekdays">Hari Kerja</option>
+                        <option value="weekends">Akhir Pekan</option>
+                        <option value="custom">Kustom</option>
+                    </select>
+                </div>
+                <div class="repeat-option">
+                    <label for="soundType">Suara Alarm</label>
+                    <select id="soundType">
+                        <option value="default">Default</option>
+                        <option value="bell">Bel</option>
+                        <option value="beep">Beep</option>
+                        <option value="melody">Melodi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="alarm-label">
+                <input type="text" id="alarmName" placeholder="Nama alarm (contoh: Bangun Pagi)">
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-set" id="setAlarm">
+                    <i class="fas fa-plus"></i> Set Alarm
+                </button>
+                <button class="btn-clear" id="clearAll">
+                    <i class="fas fa-trash"></i> Hapus Semua
+                </button>
+            </div>
+        </div>
+
+        <div class="alarms-list">
+            <h2>Alarm Aktif</h2>
+            <div id="alarmsContainer">
+                <!-- Alarm items will be added here dynamically -->
+                <div class="empty-state" id="emptyState">
+                    <i class="far fa-clock"></i>
+                    <p>Belum ada alarm yang diatur</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alarm Sounds -->
+    <audio id="alarmSoundDefault" class="alarm-sound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="alarmSoundBell" class="alarm-sound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-classic-alarm-995.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="alarmSoundBeep" class="alarm-sound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-digital-alarm-buzzer-1098.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="alarmSoundMelody" class="alarm-sound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-clear-morning-alarm-1061.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="notification" id="notification">
+        Alarm berhasil diatur!
+    </div>
+
+    <script src="app.js"></script>
+</body>
+  </html>
